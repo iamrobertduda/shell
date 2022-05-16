@@ -33,7 +33,8 @@ void openShell(char *commands[], int argc) {
     } else {
         cout << "Waiting for input" << endl;
         string input;
-        while (cin >> input) {
+        while (cin) {
+            cin >> input;
             if (input == "logout") {
                 cout << "Are you sure? (Y/n)" << endl;
                 string logout;
