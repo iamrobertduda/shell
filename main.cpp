@@ -16,31 +16,26 @@ void openShell(char *commands[], int argc) {
             arg_input++;
         }
 
-        printf("Before calling execvp()\n");
-
-        printf("Creating another process using fork()...\n");
+        cout <<"Creating another process using fork()..." << endl;
 
         if (fork() == 0) {
             // Newly spawned child Process.
             int status_code = execvp(command, argument_list);
 
-            printf("Input-Command has taken control of this child process. This won't execute unless it terminates abnormally!\n");
+            cout << command <<" has taken control of this child process" << endl;
 
             if (status_code == -1) {
-                printf("Terminated Incorrectly\n");
+                cout <<"Terminated Incorrectly" << endl;
                 return;
             }
-        } else {
-            // Old Parent process.
-            printf("This line will be printed\n");
         }
         return;
     } else {
-        cout << "Erwarte Eingabe" << endl;
+        cout << "Waiting for input" << endl;
         string input;
         while (cin >> input) {
             if (input == "logout") {
-                cout << "Sicher, dass du das Programm verlassen moechtest? (Y/n)" << endl;
+                cout << "Are you sure? (Y/n)" << endl;
                 string logout;
                 cin >> logout;
                 if (logout == "Y") {
@@ -67,23 +62,20 @@ void openShell(char *commands[], int argc) {
                 arguments[0] = cstr;
             }
 
-            printf("Before calling execvp()\n");
-
-            printf("Creating another process using fork()...\n");
+            cout << "Creating another process using fork()..." << endl;
 
             if (fork() == 0) {
                 // Newly spawned child Process.
                 int status_code = execvp(command, arguments);
 
-                printf("Input-Command has taken control of this child process. This won't execute unless it terminates abnormally!\n");
+                cout << command << " has taken control of this child process." << endl;
 
                 if (status_code == -1) {
-                    printf("Terminated Incorrectly\n");
+                    cout <<"Terminated Incorrectly" << endl;
                     return;
                 }
             } else {
-                // Old Parent process.
-                printf("This line will be printed\n");
+                continue;
             }
         }
     }
